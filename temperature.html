@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temperature Converter</title>
+
+<style>
+:root{
+    --primary:#3b82f6;
+    --bg:#f1f5f9;
+    --card:#ffffff;
+    --text:#1e293b;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background:var(--bg);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.converter{
+    background:var(--card);
+    padding:30px;
+    border-radius:15px;
+    width:350px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.1);
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:var(--primary);
+}
+
+input,select{
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+    margin-bottom:15px;
+    border:2px solid #e2e8f0;
+    border-radius:8px;
+    font-size:15px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:var(--primary);
+    color:white;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#2563eb;
+}
+
+.result{
+    margin-top:20px;
+    padding:12px;
+    text-align:center;
+    background:#e2e8f0;
+    border-radius:8px;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="converter">
+
+<h2>Temperature Converter</h2>
+
+<label>Enter Temperature</label>
+<input type="text" id="tempInput" placeholder="Enter temperature">
+
+<label>Select Unit</label>
+<select id="unit">
+<option value="c">Celsius</option>
+<option value="f">Fahrenheit</option>
+<option value="k">Kelvin</option>
+</select>
+
+<button onclick="convertTemp()">Convert</button>
+
+<div class="result" id="result">
+Result will appear here
+</div>
+
+</div>
+
+<script>
+
+function convertTemp(){
+
+let value = document.getElementById("tempInput").value;
+let unit = document.getElementById("unit").value;
+let result = document.getElementById("result");
+
+if(value === "" || isNaN(value)){
+    result.innerHTML = "Please enter a valid number";
+    return;
+}
+
+value = parseFloat(value);
+let c,f,k;
+
+if(unit === "c"){
+    c = value;
+    f = (c*9/5)+32;
+    k = c+273.15;
+}
+
+else if(unit === "f"){
+    f = value;
+    c = (f-32)*5/9;
+    k = c+273.15;
+}
+
+else{
+    k = value;
+    c = k-273.15;
+    f = (c*9/5)+32;
+}
+
+result.innerHTML =
+`Celsius: ${c.toFixed(2)} °C <br>
+Fahrenheit: ${f.toFixed(2)} °F <br>
+Kelvin: ${k.toFixed(2)} K`;
+
+}
+
+</script>
+
+</body>
+</html>

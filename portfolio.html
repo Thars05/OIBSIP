@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tharshiini RS | Portfolio</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+        section { padding: 100px 0; }
+        .section-title { font-size: 2rem; margin-bottom: 3rem; text-align: center; position: relative; }
+        .section-title::after { content: ''; width: 50px; height: 4px; background: var(--primary); position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); }
+
+        /* Navigation */
+        nav {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0; width: 100%; z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+        nav .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); }
+        .nav-links { display: flex; gap: 2rem; list-style: none; }
+        .nav-links a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: var(--transition); }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        #hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            background: radial-gradient(circle at top right, #eef2ff, #ffffff);
+            padding-top: 80px;
+        }
+        .hero-flex {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+        }
+        .hero-content { flex: 1; }
+        .hero-content h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 1.5rem; }
+        .hero-content h1 span { color: var(--primary); }
+        .hero-content p { font-size: 1.25rem; color: var(--text-light); margin-bottom: 2rem; }
+        
+        /* New Profile Image Styles */
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        .profile-img {
+            width: 350px;
+            height: 350px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; /* Organic shape */
+            object-fit: cover;
+            border: 8px solid white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            50% { border-radius: 70% 30% 30% 70% / 70% 70% 30% 30%; }
+            100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .btn { 
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 0.8rem 2rem; background: var(--primary); color: white; 
+            text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition); 
+        }
+        .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+        /* Skills Section */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1.5rem; text-align: center; }
+        .skill-card { padding: 2rem; background: var(--bg-alt); border-radius: 12px; border: 1px solid var(--border); transition: var(--transition); }
+        .skill-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+        .skill-card i { margin-bottom: 1rem; color: var(--primary); }
+
+        /* Projects Section */
+        #projects { background: var(--bg-alt); }
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .project-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+        .project-img { width: 100%; height: 200px; background: #ddd; object-fit: cover; }
+        .project-info { padding: 1.5rem; }
+        .project-tags { display: flex; gap: 0.5rem; margin: 1rem 0; }
+        .tag { font-size: 0.75rem; padding: 4px 10px; background: #eef2ff; color: var(--primary); border-radius: 20px; font-weight: 600; }
+        .project-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+
+        /* Education/Timeline */
+        .timeline { max-width: 800px; margin: 0 auto; border-left: 2px solid var(--border); padding-left: 2rem; position: relative; }
+        .timeline-item { position: relative; margin-bottom: 3rem; }
+        .timeline-item::before { 
+            content: ''; position: absolute; left: calc(-2rem - 6px); top: 0;
+            width: 10px; height: 10px; border-radius: 50%; background: var(--primary); border: 4px solid white;
+        }
+        .time { font-size: 0.85rem; font-weight: 700; color: var(--primary); text-transform: uppercase; }
+        .degree { font-size: 1.25rem; font-weight: 700; margin: 0.5rem 0; }
+        .school { color: var(--text-light); }
+
+        /* Contact Section */
+        .contact-content { text-align: center; max-width: 600px; margin: 0 auto; }
+        .social-links { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; }
+        .social-links a { color: var(--text-dark); transition: var(--transition); }
+        .social-links a:hover { color: var(--primary); }
+
+        footer { padding: 2rem 0; text-align: center; border-top: 1px solid var(--border); font-size: 0.9rem; color: var(--text-light); }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .hero-flex { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .profile-img { width: 250px; height: 250px; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container">
+            <div class="logo">PORTFOLIO.</div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="container">
+            <div class="hero-flex">
+                <div class="hero-content">
+                    <p>Hello, I'm</p>
+                    <h1><span>THARSHIINI R S.</span><br>Full Stack Developer</h1>
+                    <p>I build exceptional digital experiences that are clean, efficient, and user-centric.</p>
+                    <a href="#contact" class="btn">Get In Touch <i data-lucide="arrow-right"></i></a>
+                </div>
+                
+                <div class="hero-image">
+                    <!-- REPLACE the src URL below with your actual photo file or link -->
+                    <img src="landpage photoold.jpg" alt="Tharshiini R S" class="profile-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i data-lucide="code-2" size="40"></i>
+                    <h3>Frontend</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <i data-lucide="database" size="40"></i>
+                    <h3>Backend</h3>
+                    <p>Node.js, SQL</p>
+                </div>
+                <div class="skill-card">
+                    <i data-lucide="layout" size="40"></i>
+                    <h3>Design</h3>
+                    <p>UI/UX</p>
+                </div>
+                <div class="skill-card">
+                    <i data-lucide="terminal" size="40"></i>
+                    <h3>Tools</h3>
+                    <p>Git, AWS</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Selected Projects</h2>
+            <div class="project-grid">
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <img src="Artisans-17-8-2022.jpg" alt="P1" class="project-img">
+                    <div class="project-info">
+                        <h3>E-Commerce Application</h3>
+                        <div class="project-tags">
+                            <span class="tag">Html</span>
+                            <span class="tag">Mysql</span>
+                        </div>
+                        <p>A Ecommerce website of Artisan Marketplace for selling their products and buying from other artisans.</p>
+                        <br>
+                        <!--<a href="#" class="project-link">View Case Study →</a>-->
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <img src="orchid-facts-hero.webp" alt="P2" class="project-img">
+                    <div class="project-info">
+                        <h3>Orchid Management System</h3>
+                        <div class="project-tags">
+                            <span class="tag">Java</span>
+                            <span class="tag">Oracle Sql</span>
+                        </div>
+                        <p>To manage orchid management records for the administrator.</p>
+                        <br>
+                        <!--<a href="#" class="project-link">Live Demo →</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2 class="section-title">Education & Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="time">2023 - 2027</span>
+                    <h3 class="degree">B.E. in Computer Science</h3>
+                    <p class="school">Mepco Schlenk Engineering College</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">2022-2023</span>
+                    <h3 class="degree">Higher Secondary Education</h3>
+                    <p class="school">Ponjesly Matric Higher Secondary School</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2 class="section-title">Let's Work Together</h2>
+                <p>I'm currently looking for new opportunities. My inbox is always open whether you have a question or just want to say hi!</p>
+                <br>
+                <a href="mailto:tharshiiniramesh05@gmail.com" class="btn">Send an Email <i data-lucide="mail"></i></a>
+                
+                <div class="social-links">
+                    <a href="https://github.com/Thars05"><i data-lucide="github"></i></a>
+                    <a href="https://www.linkedin.com/in/tharshiini-r-s-210541355/"><i data-lucide="linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Tharshiini. Built with Love and Code.</p>
+        </div>
+    </footer>
+
+    <!-- Initialize Icons -->
+    <script>
+        lucide.createIcons();
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 10px 15px -3px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
